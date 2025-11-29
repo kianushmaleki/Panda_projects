@@ -35,7 +35,51 @@ if False:
     dfdfElephentsMerge = pd.merge(dfElephents1, dfElephents2, left_index=True, right_index=True, how='outer')
     print('Merged dataframe', dfdfElephentsMerge)
 
-### Activity 3: How to use groupby and aggregate functions in pandas?
+### Activity 3: How to use groupby in pandas?
+
+if False:
+    dictAnimals = {'A': 'New born elephent', 'B': 'Todler elephent', 'C': 'Sheep'} 
+    dictHumans = {'D': 'Patrick', 'E': 'Lemmi', 'F': 'Fairy'}
+    dictOthers = {'G': 'Gimli', 'H': 'Legolas', 'I': 'Aragorn'}
+    arrayTypes = ['animal','human', 'elf']
+
+    sdict1 = pd.Series(dictAnimals)
+    sdict2 = pd.Series(dictHumans)
+    sdict3 = pd.Series(dictOthers)
+    sarray1 = pd.Series(arrayTypes)
+
+    dfAnimal= pd.DataFrame(sdict1)
+    dfAnimal['Type'] = arrayTypes[0]
+    dfHuman= pd.DataFrame(sdict2)
+    dfHuman['Type'] = arrayTypes[1]
+    dfOthers= pd.DataFrame(sdict3)
+    dfOthers['Type'] = arrayTypes[2]
+    dfType = pd.DataFrame(sarray1)
+
+    print('df from dict1',dfAnimal)
+    print('df from dict2',dfHuman)      
+    print('df from dict2',dfType)   
+
+    dfCreautures = pd.concat([dfAnimal, dfHuman,dfOthers])
+    dfCreautures = dfCreautures.rename(columns={0: 'Creature'})
+    print('Combined dataframe', dfCreautures)
+
+    dfGrouped = dfCreautures.groupby('Type').count()
+    print('Grouped dataframe', dfGrouped)
+
+    num_elephents = dfCreautures['Creature'].str.contains('elephent').sum() # Count how many elephents are in column 'Creature'
+    print('number of elephents', num_elephents)
 
 
+### Activity 4: How to use agg() function in pandas?
+if True:
+    dictData = {'Category': ['A', 'B', 'A', 'B', 'A', 'B'],
+                'Values': [10, 20, 15, 25, 10, 30]}
+    dfData = pd.DataFrame(dictData)
+    print('Original DataFrame:')
+    print(dfData)
 
+    # Using groupby and agg to calculate sum and mean of 'Values' for each 'Category'
+    dfAggregated = dfData.groupby('Category').agg({'Values': ['sum', 'mean']})
+    print('\nAggregated DataFrame using agg():')
+    print(dfAggregated)
