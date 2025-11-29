@@ -1,6 +1,5 @@
 '''
 This is a file to practice using pandas and numpy libraries.
-Based on Pandas 75 exercises from https://www.kaggle.com
 The excersies are chosen to cover a wide range of pandas functionalities.
 '''
 
